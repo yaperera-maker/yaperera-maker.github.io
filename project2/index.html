@@ -2,44 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Project 2 - Modern RNNs</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-        }
-        h2, h3, h4 {
-            color: #2c3e50;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin: 10px 0;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            overflow-x: auto;
-        }
-        p.caption {
-            font-size: 0.9em;
-            color: #555;
-        }
-    </style>
+    <title>Project 2 - Modern RNNs Report</title>
 </head>
 <body>
-
-<h2>Part 1 - Basic RNN</h2>
+<h1>Part 1 - Basic RNN</h1>
 
 <p>The goal of part 1 was to implement a vanilla recurrent neural network from scratch and train it on the time machine dataset. The purpose was to study the effects of hyperparameter turing, gradient clipping and activation functions on model performance measured by validation perplexity.</p>
 
 <p>Character-level tokenization was used, where each character is treated as an individual token. It ensures consistency with the D2L reference and allows the model to learn fine-grained sequential dependencies. Long sequences were partitioned into fixed length to allow efficient mini-batch maintenance and temporal continuity.</p>
 
-<h3>Task 1: Optimize the performance of a basic RNN by tuning key hyperparameters.</h3>
-
-<p>We trained a basic RNN with the following hyperparameters: hidden units = 256, learning rate = 1.0, time steps per minibatch = 35, batch size = 32, epochs = 20, and gradient clipping = 1.0. The training perplexity decreased from 13.83 in Epoch 1 to 5.57 by Epoch 20, showing that the model effectively learned sequential patterns in the text. </p>
-
+<h2>Task 1: Optimize the performance of a basic RNN by tuning key hyperparameters.</h2>
+<p>We trained a basic RNN with the following hyperparameters: hidden units = 256, learning rate = 1.0, time steps per minibatch = 35, batch size = 32, epochs = 20, and gradient clipping = 1.0. The training perplexity decreased from 13.83 in Epoch 1 to 5.57 by Epoch 20, showing that the model effectively learned sequential patterns in the text.</p>
 <p>Perplexity dropped quickly in the first few epochs, 13.83 to 8.49 by Epoch 4, as the model captured basic text patterns, and then gradually decreased as predictions were refined. These results indicate strong predictive accuracy for a basic RNN. The chosen hyperparameters balance training speed and model performance effectively.</p>
 
 <p>The results : (copied from my results)</p>
@@ -65,15 +38,13 @@ Epoch 18, Perplexity 5.74
 Epoch 19, Perplexity 5.65
 Epoch 20, Perplexity 5.57
 </pre>
-
 <img src="Task1TrainingPerplexity.png" alt="Task 1 Training Perplexity Plot">
-<p class="caption">Figure 1: Training perplexity over 20 epochs for Part 1.</p>
-
-<h3>Task 2: Impact of Gradient Clipping and Activation Function</h3>
-
-<h4>1. Without gradient clipping</h4>
+    
+<h2>Task 2: Impact of Gradient Clipping and Activation Function</h2>
+<h3>1. Without gradient clipping</h3>
 <p>Training perplexity remained constant at 6.33 for all 20 epochs. The model failed to learn effectively because exploding gradients destabilized training. With no clipping the RNN could not improve predictions. However, it shows the importance of gradient clipping for stable learning.</p>
 
+<p>Results: (copied from my results)</p>
 <pre>
 Epoch 1, Perplexity 6.33
 Epoch 2, Perplexity 6.33
@@ -96,31 +67,48 @@ Epoch 18, Perplexity 6.33
 Epoch 19, Perplexity 6.33
 Epoch 20, Perplexity 6.33
 </pre>
-
-<img src="TrainingPerplexitynoGradientClipping.png" alt="Training Perplexity without Gradient Clipping">
-<p class="caption">Figure 2: Training perplexity without gradient clipping.</p>
-
-<h4>2. With gradient clipping</h4>
+<img src="TrainingPerplexitynoGradient Clipping.png" alt="Training Perplexity without Gradient Clipping">
+<h3>2. With gradient clipping</h3>
 <p>Training perplexity decreased from 14.23 epoch 1 to 4.26 by epoch 20. The model learned properly. Clipping gradients prevented the values from exploding allowing stable updates and effective learning.</p>
 
-<h4>3. With ReLU activation and gradient clipping</h4>
-<p>Training perplexity also decreased, showing that ReLU can be used but gradient clipping remains essential due to the potential for large gradients with ReLU. The combination of ReLU and clipping gives comparable performance to Tanh with clipping.</p>
+<p>Results: (copied from my results)</p>
+<pre>
+Epoch 1, Perplexity 14.23
+Epoch 2, Perplexity 9.64
+Epoch 3, Perplexity 8.28
+Epoch 4, Perplexity 7.45
+Epoch 5, Perplexity 6.87
+Epoch 6, Perplexity 6.41
+Epoch 7, Perplexity 6.05
+Epoch 8, Perplexity 5.75
+Epoch 9, Perplexity 5.50
+Epoch 10, Perplexity 5.29
+Epoch 11, Perplexity 5.12
+Epoch 12, Perplexity 4.97
+Epoch 13, Perplexity 4.83
+Epoch 14, Perplexity 4.72
+Epoch 15, Perplexity 4.62
+Epoch 16, Perplexity 4.52
+Epoch 17, Perplexity 4.45
+Epoch 18, Perplexity 4.39
+Epoch 19, Perplexity 4.33
+Epoch 20, Perplexity 4.26
+</pre>
 
-<img src="EffectofActivationFunction.png" alt="Effect of Activation Function">
-<p class="caption">Figure 3: Effect of activation functions on training perplexity with gradient clipping.</p>
+<h3>3. With ReLU activation and gradient clipping</h3>
+<p>Training perplexity also decreased, showing that ReLU can be used but gradient clipping remains essential due to the potential for large gradients with ReLU. The combination of ReLU and clipping gives comparable performance to Tanh with clipping</p>
 
-<h2>Part 2 – GRU</h2>
+<p>Therefore, gradient clipping is critical for stable training of RNNs, especially with longer sequences or hidden layers.</p>
+<p>Activation functions affect gradient behavior,ReLU can accelerate  learning but can also increase gradient magnitude. Overall the best results are from Tanh + gradient clipping.</p>
+<img src="EffectofActivationFunction.png" alt="Effect of Activation Function on Training Perplexity">
+    
+<h1>PART 2 : GRU</h1>
+<p>In part 2 we implemented gated recurrent units to train on the time machine dataset. The goal was to study the effects of hyperparameters and the importance of gating mechanisms on model performance measured by training and validation perplexity</p>
 
-<p>In part 2 we implemented gated recurrent units to train on the time machine dataset. The goal was to study the effects of hyperparameters and the importance of gating mechanisms on model performance measured by training and validation perplexity.</p>
-
-<h3>Task 1: Hyperparameters tuning (e.g., number of hidden units, learning rate) and analyze their influence on running time, perplexity, and the output sequence.</h3>
-
+<h2>Task 1: Hyperparameters tuning (e.g., number of hidden units, learning rate) and analyze their influence on running time, perplexity, and the output sequence.</h2>
 <p>Perplexity trends : all configurations start with a high perplexity at epoch 1 because of random initialization. Perplexity decreases steadily across epochs as the GRU learns sequential dependencies.</p>
-
 <p>Effect of hidden units and sequence length: increasing hidden units from 128 to 256 to 512 reduces the final perplexity, modern can better capture context with more hidden units. Longer num_steps  helps the GRU remember longer contexts, slightly improving final performance.</p>
-
 <p>Learning rate: higher learning rates accelerate convergence but need to be balanced to avoid instability. All configurations were stable in this training.</p>
-
 <p>Hidden units=512, learning rate =1.5, Num steps =50 final perplexity 5.30. Shows strong predictive capability and efficient learning of text sequences.</p>
 
 <p>Training GRU with {'num_hiddens': 128, 'lr': 0.5, 'num_steps': 20}</p>
@@ -147,6 +135,7 @@ Epoch 19, Perplexity 5.95
 Epoch 20, Perplexity 5.86
 </pre>
 
+    
 <p>Training GRU with {'num_hiddens': 256, 'lr': 1.0, 'num_steps': 35}</p>
 <pre>
 Epoch 1, Perplexity 17.85
@@ -195,13 +184,11 @@ Epoch 19, Perplexity 5.42
 Epoch 20, Perplexity 5.30
 </pre>
 <img src="part2GRUTrainingPerplexityforDifferentHyperparameters.png" alt="GRU Training Perplexity for Different Hyperparameters">
-<p class="caption">Figure 4: GRU training perplexity trends for various hyperparameter configurations.</p>
-
-<h3>Task 2: Ablation study on GRU gates</h3>
-
+    
+<h2>Task 2: Ablation study on GRU gates</h2>
 <p>Only reset gate active: Ignore the update gate; Only update gate active: Ignore the reset gate.</p>
 <p>The full GRU achieved the lowest training and validation perplexity. The perplexity decreased smoothly over epochs and the generated text was more meaningful and coherent. This shows that using both gates help the model learn sequence patterns effectively. Without the update gate(reset gate only) performance degraded. The training and validation perplexity were noticeably higher than full GRU. The learning curve was less stable and converged to a worse final value. This behavior is because the update gate is responsible for controlling how much of the previous hidden state is preserved. Without it, the model effectively overwrites the hidden state at every time step, preventing it from maintaining long-term dependencies.This shows the update gate plays a role in preserving memory over time. GRU without reset gate, the performance also degraded but generally less severe than when the update gate was removed. However, the model was still able to maintain some long-term structure because of the update gate. The reset gate allows the model to selectively forget irrelevant past information when computing the candidate hidden state. Without it the model always uses the entire previous hidden state. Overall, the results show that the gating mechanisms in GRUs are essential for modeling sequential data effectively.</p>
-<p>Reset gate only:</p>
+
 <pre>
 Epoch 1, Perplexity 17.83
 Epoch 2, Perplexity 12.40
@@ -223,10 +210,6 @@ Epoch 17, Perplexity 5.66
 Epoch 18, Perplexity 5.54
 Epoch 19, Perplexity 5.44
 Epoch 20, Perplexity 5.35
-</pre>
-
-<p>Update gate only:</p>
-<pre>
 Epoch 1, Perplexity 17.78
 Epoch 2, Perplexity 12.51
 Epoch 3, Perplexity 9.75
@@ -249,10 +232,8 @@ Epoch 19, Perplexity 5.40
 Epoch 20, Perplexity 5.31
 </pre>
 <img src="GRUAblationStudy.png" alt="GRU Ablation Study">
-<p class="caption">Figure 5: Ablation study showing the impact of reset and update gates on GRU performance.</p>
-
+    
 <h2>Conclusion</h2>
-
 <p>The Project 2 illustrated key principles in modern recurrent neural networks: the critical role of hyperparameter tuning, the impact of activation functions and gradient control, and the architectural advantages of gated RNNs for handling sequential data. By experimenting with these models on a character-level dataset, we gained practical insights into the challenges and strategies for building effective sequence models.</p>
 
 </body>
