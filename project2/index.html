@@ -60,7 +60,7 @@ Epoch 20, Perplexity 5.57
     <pre>
 Epoch 1-20, Perplexity 6.33
     </pre>
-
+<img src="TrainingPerplexitynoGradientClipping.png" alt="Training Perplexity without Gradient Clipping">
     <h4>2. With Gradient Clipping</h4>
     <p>Training perplexity decreased from 14.23 to 4.26, showing stable and effective learning.</p>
     <pre>
@@ -89,22 +89,22 @@ Epoch 20, Perplexity 4.26
     <h4>3. ReLU Activation + Gradient Clipping</h4>
     <p>Training also decreased successfully. ReLU can accelerate learning but may increase gradient magnitude, so clipping remains essential. The best results were obtained with Tanh + gradient clipping.</p>
 
-    <!-- Example image placeholders -->
-    <img src="./media/part1_perplexity.png" alt="Part 1 Training Perplexity Plot">
-    <img src="./media/part1_gradient_clipping.png" alt="Gradient Clipping Comparison">
-
+   <img src="EffectofActivationFunction.png" alt="Effect of Activation Function on Training Perplexity">
+    
     <h2>Part 2 – GRU</h2>
     <p>In Part 2 we implemented gated recurrent units (GRU) on the time machine dataset to study hyperparameters and gating mechanisms on training and validation perplexity.</p>
 
     <h3>Task 1: Hyperparameter Tuning</h3>
     <p>Perplexity decreased steadily across epochs as GRU learned sequential dependencies. Increasing hidden units and number of steps helped improve performance. Higher learning rates accelerated convergence while maintaining stability.</p>
     <p>Example: hidden units = 512, learning rate = 1.5, num steps = 50 → final perplexity = 5.30.</p>
-    <img src="./media/part2_gru_hyperparameters.png" alt="GRU Hyperparameters Results">
+    
+   <img src="part2GRUTrainingPerplexityforDifferentHyperparameters.png" alt="GRU Training Perplexity for Different Hyperparameters">
 
     <h3>Task 2: Ablation Study on GRU Gates</h3>
     <p>The full GRU achieved the lowest training and validation perplexity. Using only reset gate or only update gate degraded performance. This demonstrates that both gates are essential for modeling sequential data effectively. Reset gate helps selectively forget irrelevant information; update gate preserves memory over time.</p>
-    <img src="./media/part2_gru_gates.png" alt="GRU Ablation Study Results">
-
+   
+<img src="GRUAblationStudy.png" alt="GRU Ablation Study">
+    
     <h2>Conclusion</h2>
     <p>
         The Project 2 illustrated key principles in modern recurrent neural networks: 
