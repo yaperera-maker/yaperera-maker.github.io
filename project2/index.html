@@ -127,7 +127,37 @@ Epoch 20, Perplexity 4.26
     <p>Effect of hidden units and sequence length: increasing hidden units from 128 to 256 to 512 reduces the final perplexity, modern can better capture context with more hidden units. Longer num_steps  helps the GRU remember longer contexts, slightly improving final performance.</p>
     <p>Learning rate: higher learning rates accelerate convergence but need to be balanced to avoid instability. All configurations were stable in this training.</p>
     <p>Hidden units=512, learning rate =1.5, Num steps =50 final perplexity 5.30. Shows strong predictive capability and efficient learning of text sequences.</p>
-
+    <h3>Key results (selected configurations):</h3>
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Hidden Units</th>
+      <th>Learning Rate</th>
+      <th>Num Steps</th>
+      <th>Final Perplexity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>128</td>
+      <td>0.5</td>
+      <td>20</td>
+      <td>5.86</td>
+    </tr>
+    <tr>
+      <td>256</td>
+      <td>1.0</td>
+      <td>35</td>
+      <td>5.35</td>
+    </tr>
+    <tr>
+      <td>512</td>
+      <td>1.5</td>
+      <td>50</td>
+      <td>5.30</td>
+    </tr>
+  </tbody>
+</table>
     <p>Training GRU with {'num_hiddens': 128, 'lr': 0.5, 'num_steps': 20}</p>
     <pre>
 Epoch 1, Perplexity 17.82
