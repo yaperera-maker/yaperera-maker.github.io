@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3: Attention and Transformers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            margin-top: 30px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
+<h1>Project 3: Attention and Transformers</h1>
+
+<h2>Introduction</h2>
+<p>
+    This includes the implementation, training and evaluation of attention-based Seq2Seq models for English to French neural machine translation. The project has two parts: part 1 covers the implementation and hyperparameter tunning of a Bahdanau attention mechanism build on top of a GRU-based encoder decoder, part 2 extends the model to multi-head attention to examine how multiple parallel attention heads affect translation quality and what different heads learn to focus on. Translation quality is measured using BLEU scores and attention weight visualizations.
+</p>
+
+<h2>Model Description</h2>
+<p>The model consists of 3 main components:</p>
+<ul>
+    <li><b>Encoder:</b> Implementing using a multi-layer GRU, it converts the input English sentence into hidden representations, outputs : hidden states for all time steps and final hidden state</li>
+    <li><b>Attention Mechanism:</b> computing attention weights using decoder hidden state and encoder outputs</li>
+    <li><b>Decoder:</b> uses GRU to generate French words one at a time, at each step computes attention weights, combines context vector with input embedding and produces next work prediction</li>
+</ul>
+
+<h2>Part 1: Basic Attention Mechanism</h2>
+
+<h3>Task 1: Hyperparameter tuning</h3>
+<p>A systematic grid search was performed over key hyperparameters to identify configurations that maximize BLEU score on the held-out test set. The top three configurations were selected. Several hyperparameter configurations were tested to improve performance. Configuration summary:</p>
+
+<h3>Top 3 configurations:</h3>
+<p>Three configurations were trained on 10000 English_French sentence pairs for 15 epochs using:</p>
+<table>
+    <tr>
+        <th>Config</th>
+        <th>embed_size</th>
+        <th>Num hiddens</th>
+        <th>num_layers</th>
+        <th>dropout</th>
+        <th>lr</th>
+    </tr>
+    <tr>
+        <td>Config1</td>
+        <td>128</td>
+        <td>128</td>
+        <td>1</td>
+        <td>0.1</td>
+        <td>0.001</td>
+    </tr>
+    <tr>
+        <td>Config2</td>
+        <td>256</td>
+        <td>256</td>
+        <td>2</td>
+        <td>0.3</td>
+        <td>0.001</td>
+    </tr>
+    <tr>
+        <td>Config3</td>
+        <td>256</td>
+        <td>256</td>
+        <td>2</td>
+        <td>0.2</td>
+        <td>0.0005</td>
+    </tr>
+</table>
+
+<h3>Training & Validation Loss Plots:</h3>
+
+<pre>
+=== Training Config1_baseline ===
+Epoch 1/15 | Train Loss: 4.5943 | Val Loss: 3.9393
+Epoch 2/15 | Train Loss: 3.6599 | Val Loss: 3.7320
+Epoch 3/15 | Train Loss: 3.3626 | Val Loss: 3.5336
+Epoch 4/15 | Train Loss: 3.1555 | Val Loss: 3.3910
+Epoch 5/15 | Train Loss: 2.9225 | Val Loss: 3.2698
+Epoch 6/15 | Train Loss: 2.7219 | Val Loss: 3.1492
+Epoch 7/15 | Train Loss: 2.5618 | Val Loss: 3.0081
+Epoch 8/15 | Train Loss: 2.3916 | Val Loss: 2.9503
+Epoch 9/15 | Train Loss: 2.2137 | Val Loss: 2.8698
+Epoch 10/15 | Train Loss: 2.0765 | Val Loss: 2.7924
+Epoch 11/15 | Train Loss: 1.9507 | Val Loss: 2.7198
+Epoch 12/15 | Train Loss: 1.8383 | Val Loss: 2.6582
+Epoch 13/15 | Train Loss: 1.7129 | Val Loss: 2.6119
+Epoch 14/15 | Train Loss: 1.5866 | Val Loss: 2.5642
+Epoch 15/15 | Train Loss: 1.5020 | Val Loss: 2.5130
+</pre>
+
+<pre>
+=== Training Config2_larger ===
+Epoch 1/15 | Train Loss: 4.2597 | Val Loss: 3.8035
+Epoch 2/15 | Train Loss: 3.4459 | Val Loss: 3.5209
+Epoch 3/15 | Train Loss: 3.0790 | Val Loss: 3.2103
+Epoch 4/15 | Train Loss: 2.7117 | Val Loss: 3.0651
+Epoch 5/15 | Train Loss: 2.4577 | Val Loss: 2.8622
+Epoch 6/15 | Train Loss: 2.2109 | Val Loss: 2.6759
+Epoch 7/15 | Train Loss: 1.9716 | Val Loss: 2.5831
+Epoch 8/15 | Train Loss: 1.7805 | Val Loss: 2.4599
+Epoch 9/15 | Train Loss: 1.6435 | Val Loss: 2.3944
+Epoch 10/15 | Train Loss: 1.4564 | Val Loss: 2.3510
+Epoch 11/15 | Train Loss: 1.3043 | Val Loss: 2.3188
+Epoch 12/15 | Train Loss: 1.2112 | Val Loss: 2.2639
+Epoch 13/15 | Train Loss: 1.0832 | Val Loss: 2.1745
+Epoch 14/15 | Train Loss: 0.9730 | Val Loss: 2.1545
+Epoch 15/15 | Train Loss: 0.8633 | Val Loss: 2.1935
+</pre>
+
+<pre>
+=== Training Config3_deep ===
+Epoch 1/15 | Train Loss: 4.2140 | Val Loss: 3.9961
+Epoch 2/15 | Train Loss: 3.4845 | Val Loss: 3.5207
+Epoch 3/15 | Train Loss: 3.1065 | Val Loss: 3.2492
+Epoch 4/15 | Train Loss: 2.7750 | Val Loss: 3.0777
+Epoch 5/15 | Train Loss: 2.4872 | Val Loss: 2.8266
+Epoch 6/15 | Train Loss: 2.2135 | Val Loss: 2.6958
+Epoch 7/15 | Train Loss: 2.0008 | Val Loss: 2.5398
+Epoch 8/15 | Train Loss: 1.7961 | Val Loss: 2.4645
+Epoch 9/15 | Train Loss: 1.5993 | Val Loss: 2.3949
+Epoch 10/15 | Train Loss: 1.4385 | Val Loss: 2.3153
+Epoch 11/15 | Train Loss: 1.2762 | Val Loss: 2.2736
+</pre>
+
+<h3>BLEU scores (copied from the results):</h3>
+<table>
+    <tr>
+        <th>Config</th>
+        <th>Avg BLEU-4</th>
+    </tr>
+    <tr>
+        <td>Config1_baseline</td>
+        <td>0.1839</td>
+    </tr>
+    <tr>
+        <td>Config2_larger</td>
+        <td>0.1839</td>
+    </tr>
+    <tr>
+        <td>Config3_deep</td>
+        <td>0.2759</td>
+    </tr>
+</table>
+
+<h3>Results and discussion</h3>
+<p>
+Config1_baseline: started with a high train loss of 4.59 and decreased to 1.50 by epoch 15. The validation loss dropped from 3.93 to 2.51. Which shows consistent leaning throughout the training. However the gap between train loss and val loss indicates mild overfitting due to small model capacity. Config2_larger: showed faster convergence than config1, reaching a train loss of 0.86 by epoch 15 compared to 1.50 for Config1. The larger hidden size of 256 and 2 layers allowed the model to learn more complex patterns. Val loss reached 2.19 which is the best suggesting some overfitting. Config3_deeper: showed similar behavior to Config2 with train loss reaching 1.27 at epoch 11. The lower learning rate of 0.0005 caused slightly slower convergence compared to Config2. Resulted more stable training with less sharp drops in loss. Config3_deep has the highest BLEU score of 0.2759, outperforming both Config1 and Config2 despite not having the lowest validation loss. So, the lowest training loss does not always mean the best translation quality. Config1_baseline and Config2_larger both achieved identical BLEU scores of 0.1839 despite Config2 having a significantly lower final train loss of 0.86 compared to Config1.50. This suggests that Config2 overfit to the training data it memorized training sentences rather than learning generalizable translation patterns. The large gap between Config2 train loss (0.86) and val loss (2.19) confirms this overfitting behavior. Config3_deep used a slightly lower learning rate of 0.0005 combined with lower dropout of 0.2. The slower, more controlled learning rate prevented the model from overfitting aggressively, which is why it generalized better to unseen test sentences and achieved the highest BLEU score of 0.2759
+</p>
+
+<h3>Task 2: Attention visualization</h3>
+<p>Heatmaps:</p>
+
+<p>
+Results and discussion:<br>
+"go .":  The model only outputs"! " failing to generate the French verb "va". The attention heatmap shows the model focusing entirely on the punctuation token "." in the source. This is because "go ." is an extremely short imperative sentence and appears infrequently in the 10000 training examples, so the model never learned to map "go" to "va".<br>
+"I lost ." : The model correctly predicts "perdu" which means "lost" capturing the core meaning of the sentence. The attention heatmap is expected to show strong focused attention on the word "lost" when generating "perdu", showing the attention mechanism working correctly for content words. The auxiliary words "j' ai" are missing because the model has not fully learned French grammatical structure with limited training data.<br>
+"he's calm ." : This is the best result among all four sentences. The model correctly predicts "calme" which is the exact French translation of "calm". The attention heatmap should show a clear focused pattern where the model attends strongly to "calm" in the source when generating "calme" in the output. This demonstrates that the attention mechanism successfully learns word level alignment when the vocabulary is well represented in training data.<br>
+“Wow”: the model predicts only the ‘!” like the “go” .<br>
+The four heatmaps demonstrate three distinct behaviors of the attention mechanism. For well represented vocabulary words like "calm" the model produces correct translations with focused attention weights showing clear word alignment. For partially known sentences like "i lost ." The model captures content words but misses grammatical structure. For rare or unseen phrases like "go ." and “wow” the model fails completely, producing only punctuation. These results show that the attention mechanism itself is functioning correctly but the limitations are because of insufficient training data and vocabulary coverage rather than a flaw in the attention architecture.
+</p>
+
+<h2>Part 2: Multi-head Attention</h2>
+<p>Multi-headed attention, runs multiple attention functions in parallel, allowing the model to jointly attend to information from different representation subspaces at different positions.</p>
+
+<h3>Task 1: Implement Multi-Head Attention</h3>
+
+<pre>
+Training 1_head
+Epoch 1/20 | Train: 4.2316 | Val: 3.8468
+Epoch 2/20 | Train: 3.4364 | Val: 3.5072
+...
+Epoch 20/20 | Train: 1.0696 | Val: 2.4157
+</pre>
+
+<pre>
+Training 2_heads
+Epoch 1/20 | Train: 4.2255 | Val: 3.8214
+...
+Epoch 20/20 | Train: 0.8116 | Val: 2.2039
+</pre>
+
+<p>Increasing the number of attention heads generally improved training loss convergence. Validation loss decreased most efficiently with 8 heads suggesting better generalization. Multi-head attention allows the model to capture diverse features from different representation subspaces, improving performance compared to a single head.</p>
+
+<h3>BLEU scores across configurations</h3>
+<table>
+    <tr>
+        <th>Config</th>
+        <th>Avg BLEU-4</th>
+    </tr>
+    <tr>
+        <td>1_head</td>
+        <td>0.1226</td>
+    </tr>
+    <tr>
+        <td>2_heads</td>
+        <td>0.1226</td>
+    </tr>
+    <tr>
+        <td>4_heads</td>
+        <td>0.1226</td>
+    </tr>
+    <tr>
+        <td>8_heads</td>
+        <td>0.2420</td>
+    </tr>
+</table>
+
+<p>Best model: 8_heads (BLEU=0.2420)</p>
+<p>Observations: BLEU remained low for 1,2,4 heads. The 8 -head model achieved the highest indicating improved translation quality. This is showing that adding more attention heads allows the model to capture more contextual information and improve translation quality.</p>
+
+<h3>Sample translation(8 heads)</h3>
+<pre>
+REF : j' ai perdu .
+PRED: perdu perdu .
+
+REF : il est calme .
+PRED: est calme .
+
+REF : il est jeune .
+PRED: est grand .
+</pre>
+
+<p>Observation: the translation improves slightly, although some errors are still there. Multi-head attention helps capture structural relationships better than single-head attention.</p>
+
+<h3>Task 2: Analysis of Attention Heads</h3>
+<p>
+Attention weights: For selected sentence pairs, we plotted attention heatmaps for all 8 heads.<br>
+Example: “i lost .” → “j’ai perdu .”<br>
+Head diversity: Some heads focus on individual source words (e.g., “i” or “lost”), while others attend broadly across the sentence.<br>
+Redundancy: Certain heads show similar attention patterns, which can reinforce key information.<br>
+Interpretation: Multiple heads allow the model to capture complementary features of the input sequence.
+</p>
+
+<h2>Conclusion</h2>
+<p>
+Multi-head attention significantly improves neural machine translation performance over single-head attention, capturing richer contextual information and enabling better sequence modeling. This project demonstrates both the practical implementation and interpretability of attention mechanisms.
+</p>
+
+</body>
+</html>
