@@ -345,10 +345,16 @@ Epoch 20/20 | Train: 0.8082 | Val: 2.2039
 <section id="performance-comparison">
   <h2>Comparison of Performance: Part 1 vs Part 2</h2>
   <p>
-    Comparing Part 1 and Part 2, we see noticeable changes in translation performance. In Part 1, the baseline and larger models achieved <strong>BLEU-4 scores</strong> of 0.1839, 
-    while the deeper model reached 0.2759. In Part 2, multi-head attention with 1, 2, or 4 heads performs worse than the Part 1 baseline, with a BLEU-4 of 0.1226, indicating that a small 
-    number of heads may not capture sufficient contextual information. However, increasing the number of heads to 8 improves performance significantly, raising the BLEU-4 to 0.2420, which surpasses the baseline but is slightly below the Part 1 deep model. This shows that 
-    <strong>multi-headattention</strong> can enhance translation quality, but its effectiveness depends strongly on the number of heads: too few heads lead to underperformance, while more heads allow the model to capture richer dependencies in the input and achieve better translation results.
+    Comparing Part 1 and Part 2, we see noticeable changes in translation performance. 
+    In Part 1, the baseline and larger models achieved BLEU-4 scores of 0.1839, 
+    while the deeper model reached 0.2759. In Part 2, multi-head attention with 1, 2, or 4 heads 
+    performs worse than the Part 1 baseline, with a BLEU-4 of 0.1226, indicating that a small 
+    number of heads may not capture sufficient contextual information. However, increasing the 
+    number of heads to 8 improves performance significantly, raising the BLEU-4 to 0.2420, which 
+    surpasses the baseline but is slightly below the Part 1 deep model. This shows that 
+    multi-head attention can enhance translation quality, but its effectiveness 
+    depends strongly on the number of heads: too few heads lead to underperformance, while more 
+    heads allow the model to capture richer dependencies in the input and achieve better translation results.
   </p>
 </section>
 <h3>Sample translation(8 heads)</h3>
