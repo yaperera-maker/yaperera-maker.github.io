@@ -196,19 +196,104 @@ The four heatmaps demonstrate three distinct behaviors of the attention mechanis
 
 <h3>Task 1: Implement Multi-Head Attention</h3>
 
+<h2>Part 2: Multi-head Attention</h2>
+
+<h3>Task 1: Implement Multi-Head Attention</h3>
+
+<h4>Training 1_head</h4>
 <pre>
-Training 1_head
 Epoch 1/20 | Train: 4.2316 | Val: 3.8468
 Epoch 2/20 | Train: 3.4364 | Val: 3.5072
-...
+Epoch 3/20 | Train: 3.1041 | Val: 3.3365
+Epoch 4/20 | Train: 2.8542 | Val: 3.2405
+Epoch 5/20 | Train: 2.6935 | Val: 3.0976
+Epoch 6/20 | Train: 2.5293 | Val: 2.9535
+Epoch 7/20 | Train: 2.3713 | Val: 2.9246
+Epoch 8/20 | Train: 2.2259 | Val: 2.8738
+Epoch 9/20 | Train: 2.1111 | Val: 2.8035
+Epoch 10/20 | Train: 1.9594 | Val: 2.7277
+Epoch 11/20 | Train: 1.8609 | Val: 2.7283
+Epoch 12/20 | Train: 1.7366 | Val: 2.6754
+Epoch 13/20 | Train: 1.6181 | Val: 2.6109
+Epoch 14/20 | Train: 1.5413 | Val: 2.5684
+Epoch 15/20 | Train: 1.4614 | Val: 2.5456
+Epoch 16/20 | Train: 1.3699 | Val: 2.4848
+Epoch 17/20 | Train: 1.2714 | Val: 2.4643
+Epoch 18/20 | Train: 1.2064 | Val: 2.4519
+Epoch 19/20 | Train: 1.1320 | Val: 2.4330
 Epoch 20/20 | Train: 1.0696 | Val: 2.4157
 </pre>
 
+<h4>Training 2_heads</h4>
 <pre>
-Training 2_heads
 Epoch 1/20 | Train: 4.2255 | Val: 3.8214
-...
-Epoch 20/20 | Train: 0.8116 | Val: 2.2039
+Epoch 2/20 | Train: 3.4513 | Val: 3.5847
+Epoch 3/20 | Train: 3.0794 | Val: 3.3049
+Epoch 4/20 | Train: 2.7643 | Val: 3.0960
+Epoch 5/20 | Train: 2.5561 | Val: 2.9959
+Epoch 6/20 | Train: 2.3258 | Val: 2.8381
+Epoch 7/20 | Train: 2.1685 | Val: 2.7296
+Epoch 8/20 | Train: 2.0054 | Val: 2.6388
+Epoch 9/20 | Train: 1.8473 | Val: 2.5566
+Epoch 10/20 | Train: 1.7159 | Val: 2.5200
+Epoch 11/20 | Train: 1.5988 | Val: 2.4540
+Epoch 12/20 | Train: 1.4908 | Val: 2.3840
+Epoch 13/20 | Train: 1.3597 | Val: 2.3669
+Epoch 14/20 | Train: 1.2757 | Val: 2.3453
+Epoch 15/20 | Train: 1.1779 | Val: 2.3003
+Epoch 16/20 | Train: 1.0930 | Val: 2.2517
+Epoch 17/20 | Train: 1.0070 | Val: 2.2566
+Epoch 18/20 | Train: 0.9412 | Val: 2.2507
+Epoch 19/20 | Train: 0.8647 | Val: 2.1865
+Epoch 20/20 | Train: 0.8116 | Val: 2.2197
+</pre>
+
+<h4>Training 4_heads</h4>
+<pre>
+Epoch 1/20 | Train: 4.2683 | Val: 3.8853
+Epoch 2/20 | Train: 3.4536 | Val: 3.5830
+Epoch 3/20 | Train: 3.0719 | Val: 3.3303
+Epoch 4/20 | Train: 2.8261 | Val: 3.1381
+Epoch 5/20 | Train: 2.5877 | Val: 2.9710
+Epoch 6/20 | Train: 2.3908 | Val: 2.8568
+Epoch 7/20 | Train: 2.2160 | Val: 2.7756
+Epoch 8/20 | Train: 2.0318 | Val: 2.6920
+Epoch 9/20 | Train: 1.8780 | Val: 2.6242
+Epoch 10/20 | Train: 1.7552 | Val: 2.5738
+Epoch 11/20 | Train: 1.6232 | Val: 2.4849
+Epoch 12/20 | Train: 1.5073 | Val: 2.4167
+Epoch 13/20 | Train: 1.3561 | Val: 2.4058
+Epoch 14/20 | Train: 1.3151 | Val: 2.3457
+Epoch 15/20 | Train: 1.1759 | Val: 2.3623
+Epoch 16/20 | Train: 1.1083 | Val: 2.3065
+Epoch 17/20 | Train: 1.0212 | Val: 2.3144
+Epoch 18/20 | Train: 0.9501 | Val: 2.2929
+Epoch 19/20 | Train: 0.8755 | Val: 2.2856
+Epoch 20/20 | Train: 0.8291 | Val: 2.2564
+</pre>
+
+<h4>Training 8_heads</h4>
+<pre>
+Epoch 1/20 | Train: 4.2504 | Val: 3.8435
+Epoch 2/20 | Train: 3.4140 | Val: 3.4826
+Epoch 3/20 | Train: 3.0541 | Val: 3.2169
+Epoch 4/20 | Train: 2.7595 | Val: 3.0590
+Epoch 5/20 | Train: 2.5390 | Val: 2.9466
+Epoch 6/20 | Train: 2.3464 | Val: 2.8291
+Epoch 7/20 | Train: 2.1515 | Val: 2.7085
+Epoch 8/20 | Train: 2.0068 | Val: 2.6370
+Epoch 9/20 | Train: 1.8613 | Val: 2.5919
+Epoch 10/20 | Train: 1.6975 | Val: 2.4985
+Epoch 11/20 | Train: 1.6006 | Val: 2.4280
+Epoch 12/20 | Train: 1.4691 | Val: 2.4033
+Epoch 13/20 | Train: 1.3680 | Val: 2.3597
+Epoch 14/20 | Train: 1.2564 | Val: 2.3429
+Epoch 15/20 | Train: 1.1461 | Val: 2.2779
+Epoch 16/20 | Train: 1.0886 | Val: 2.2442
+Epoch 17/20 | Train: 1.0101 | Val: 2.2262
+Epoch 18/20 | Train: 0.9287 | Val: 2.2863
+Epoch 19/20 | Train: 0.8669 | Val: 2.2315
+Epoch 20/20 | Train: 0.8082 | Val: 2.2039
 </pre>
 
 <p>Increasing the number of attention heads generally improved training loss convergence. Validation loss decreased most efficiently with 8 heads suggesting better generalization. Multi-head attention allows the model to capture diverse features from different representation subspaces, improving performance compared to a single head.</p>
