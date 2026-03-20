@@ -296,6 +296,8 @@ Epoch 19/20 | Train: 0.8669 | Val: 2.2315
 Epoch 20/20 | Train: 0.8082 | Val: 2.2039
 </pre>
 
+    <img src="head.png" alt="Multi-head Attention Overview" style="max-width:100%; height:auto; margin-top:20px; margin-bottom:20px;">
+    
 <p>Increasing the number of attention heads generally improved training loss convergence. Validation loss decreased most efficiently with 8 heads suggesting better generalization. Multi-head attention allows the model to capture diverse features from different representation subspaces, improving performance compared to a single head.</p>
 
 <h3>BLEU scores across configurations</h3>
@@ -347,6 +349,9 @@ Head diversity: Some heads focus on individual source words (e.g., “i” or �
 Redundancy: Certain heads show similar attention patterns, which can reinforce key information.<br>
 Interpretation: Multiple heads allow the model to capture complementary features of the input sequence.
 </p>
+<img src="head1.png" alt="Multi-head Attention Head 1" style="max-width:100%; height:auto; margin-top:10px; margin-bottom:10px;">
+<img src="head2.png" alt="Multi-head Attention Head 2" style="max-width:100%; height:auto; margin-top:10px; margin-bottom:10px;">
+<img src="head3.png" alt="Multi-head Attention Head 3" style="max-width:100%; height:auto; margin-top:10px; margin-bottom:10px;">
 
 <h2>Conclusion</h2>
 <p>
