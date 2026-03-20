@@ -177,7 +177,11 @@ Config1_baseline: started with a high train loss of 4.59 and decreased to 1.50 b
 
 <h3>Task 2: Attention visualization</h3>
 <p>Heatmaps:</p>
-
+<img src="atten1.png" alt="Attention Heatmap 1" style="max-width:100%; height:auto; margin-bottom:10px;">
+<img src="atten2.png" alt="Attention Heatmap 2" style="max-width:100%; height:auto; margin-bottom:10px;">
+<img src="atten3.png" alt="Attention Heatmap 3" style="max-width:100%; height:auto; margin-bottom:10px;">
+<img src="atten4.png" alt="Attention Heatmap 4" style="max-width:100%; height:auto; margin-bottom:10px;">
+    
 <p>
 Results and discussion:<br>
 "go .":  The model only outputs"! " failing to generate the French verb "va". The attention heatmap shows the model focusing entirely on the punctuation token "." in the source. This is because "go ." is an extremely short imperative sentence and appears infrequently in the 10000 training examples, so the model never learned to map "go" to "va".<br>
