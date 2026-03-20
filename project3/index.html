@@ -196,9 +196,25 @@ The four heatmaps demonstrate three distinct behaviors of the attention mechanis
 
 <h3>Task 1: Implement Multi-Head Attention</h3>
 
-<h2>Part 2: Multi-head Attention</h2>
-
-<h3>Task 1: Implement Multi-Head Attention</h3>
+<section id="task1-introduction">
+  <h2>Task 1: Implementation and Evaluation of Multi-Head Attention</h2>
+  <p>
+    Task 1 focuses on the implementation and evaluation of <strong>multi-head attention</strong>. 
+    The single-head attention used in the previous model is replaced with a multi-head attention module.
+  </p>
+  <p>
+    The model is trained on the English–French dataset, and both training and validation loss curves 
+    are recorded to monitor performance during training.
+  </p>
+  <p>
+    Performance is then compared against Part 1 using <strong>BLEU scores</strong>, analyzing whether 
+    multi-head attention leads to improvements in translation quality.
+  </p>
+  <p>
+    Also we explore how varying the number of attention heads (e.g., 1, 2, 4, 8) affects both 
+    the learning process and the translation results.
+  </p>
+</section>
 
 <h4>Training 1_head</h4>
 <pre>
