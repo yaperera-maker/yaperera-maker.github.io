@@ -358,6 +358,14 @@ PRED: est grand .
 <p>Observation: the translation improves slightly, although some errors are still there. Multi-head attention helps capture structural relationships better than single-head attention.</p>
 
 <h3>Task 2: Analysis of Attention Heads</h3>
+<section id="task2-analysis">
+<p>
+Task 2 is dedicated to analyzing the behavior of the individual attention heads. 
+Attention weights from each head are visualized on selected translated sentence pairs. The goal is to examine whether different heads focus on different parts of the input, 
+revealing patterns of <strong>diversity</strong> or <strong>redundancy</strong> among heads. This analysis provides insights into how multi-head attention distributes focus across 
+the input sequence, and how each head contributes to translation performance.
+</p>
+</section>
 <p>
 Attention weights: For selected sentence pairs, we plotted attention heatmaps for all 8 heads.<br>
 Example: “i lost .” → “j’ai perdu .”<br>
