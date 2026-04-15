@@ -154,8 +154,8 @@ Epoch [10/10] Loss: 14349.2031
 DCGAN was implemented to generate realistic Pokemon images from random noise vectors. The model consists of two neural networks:
 </p>
 
-<p>Generator</p>
-<p>Discriminator</p>
+<p>1)Generator</p>
+<p>2)Discriminator</p>
 
 <p>
 Generator: maps a random noise vector into a 64×64 RGB image. It is built using transposed convolution layers that progressively upsample the latent vector into an image. Batch normalization and ReLU activation are used to stabilize training and improve convergence.
@@ -181,11 +181,10 @@ Discriminator: convolutional neural network that classifies images as real or fa
 
 <p>
 We use LeakyReLU in the discriminator to help the model learn with more stability. After training, we observe the loss values and generate sample images to evaluate how well the model learns.
+LeakyReLU was used in the discriminator to improve training stability by allowing small gradients for negative inputs.
+
 </p>
 
-<p>
-LeakyReLU was used in the discriminator to improve training stability by allowing small gradients for negative inputs.
-</p>
     
 <h3>Training Results:</h3>
 
