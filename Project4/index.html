@@ -208,7 +208,8 @@ Early epochs are noise-like images.
 Mid epochs: blurry shapes 
 Final epochs: partially structure Pokemon -like images
 </p>
-
+<img src="t1.png" alt="t6">
+<img src="t1.png" alt="t7">
 <h3>Task 2: GAN Tuning and Evaluation</h3>
 
 <p>
@@ -251,7 +252,14 @@ improving smoothly, showing unstable training.
 Images: 
 Outputs remain noisy for most epochs. Very limited improvement in structure. Poor convergence compared to task 1.
 </p>
+<img src="t1.png" alt="t8">
+<img src="t1.png" alt="t9">
 
+<img src="t1.png" alt="t10">
+<img src="t1.png" alt="t11">
+<img src="t1.png" alt="t12">
+<img src="t1.png" alt="t13">
+    
 <p>
 Overall ,this means the model is not balanced. Standard ReLU makes the discriminator dominate the training, which leads to worse learning for the 
 generator and lower quality results. In comparison, Leaky ReLU works better because it still allows small gradients for negative values, which 
