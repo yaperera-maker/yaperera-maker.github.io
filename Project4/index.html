@@ -150,30 +150,57 @@ Epoch [10/10] Loss: 14349.2031
 
 <h3>Task 1: Implement a deep convolutional GAN.</h3>
 
-<p>
-DCGAN was implemented  to generate realistic Pokemon images from random noise vectors. The model consists of two neural networks
-1)Generator 
-2)Discriminator
-Generator maps a random noise vector into a 64×64 RGB image. It is built using transposed convolution layers that progressively upsample 
-the latent vector into an image. Batch normalization and ReLU activation are used to stabilize training and improve convergence. </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DCGAN Architecture</title>
+</head>
+<body>
+
+<h2>DCGAN Implementation</h2>
 
 <p>
-Each basic block in the Generator includes:
-    Transposed Convolution Layer
-    Batch Normalization
-    ReLU Activation
- </p>   
-<p>    
-Discriminator is a convolutional neural network that classifies images as real or fake. It progressively downsamples the input image while extracting features for 
-binary classification. Each convolutional block uses batch normalization and LeakyReLU activation to improve gradient flow and avoid the dying ReLU problem. </p>   
-    
-<p>Each basic block in the Discriminator includes:
-
-Convolution Layer
-Batch Normalization
-Leaky ReLU Activation
-
+DCGAN was implemented to generate realistic Pokemon images from random noise vectors. The model consists of two neural networks:
 </p>
+
+<ul>
+    <li>Generator</li>
+    <li>Discriminator</li>
+</ul>
+
+<hr>
+
+<h3>Generator</h3>
+
+<p>
+The Generator maps a random noise vector into a 64×64 RGB image. It is built using transposed convolution layers that progressively upsample the latent vector into an image. Batch normalization and ReLU activation are used to stabilize training and improve convergence.
+</p>
+
+<h4>Generator Architecture (Basic Block)</h4>
+
+<ul>
+    <li>Transposed Convolution Layer</li>
+    <li>Batch Normalization</li>
+    <li>ReLU Activation</li>
+</ul>
+
+<hr>
+
+<h3>Discriminator</h3>
+
+<p>
+The Discriminator is a convolutional neural network that classifies images as real or fake. It progressively downsamples the input image while extracting features for binary classification. Each convolutional block uses batch normalization and LeakyReLU activation to improve gradient flow and avoid the dying ReLU problem.
+</p>
+
+<h4>Discriminator Architecture (Basic Block)</h4>
+
+<ul>
+    <li>Convolution Layer</li>
+    <li>Batch Normalization</li>
+    <li>Leaky ReLU Activation</li>
+</ul>
+
 <p>   
 We use LeakyReLU in the discriminator to help the model to learn more stability. After training, we see the loss values and generate sample images to 
 see how well the model learns. 
