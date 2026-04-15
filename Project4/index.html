@@ -273,6 +273,9 @@ improving smoothly, showing unstable training.
 <p>
 Images: 
 Outputs remain noisy for most epochs. Very limited improvement in structure. Poor convergence compared to task 1.
+This means the model is not balanced. Standard ReLU makes the discriminator dominate the training, which leads to worse learning for the 
+generator and lower quality results. In comparison, Leaky ReLU works better because it still allows small gradients for negative values, which 
+helps the generator learn more effectively and keeps the training more stable.
 </p>
 
 <img src="t8.png" alt="t8" style="max-width:100%; display:block; margin:10px 0;">
@@ -283,11 +286,15 @@ Outputs remain noisy for most epochs. Very limited improvement in structure. Poo
 <img src="t12.png" alt="t12" style="max-width:100%; display:block; margin:10px 0;">
 <img src="t13.png" alt="t13" style="max-width:100%; display:block; margin:10px 0;">
 
-   
 <p>
-Overall ,this means the model is not balanced. Standard ReLU makes the discriminator dominate the training, which leads to worse learning for the 
-generator and lower quality results. In comparison, Leaky ReLU works better because it still allows small gradients for negative values, which 
-helps the generator learn more effectively and keeps the training more stable.
-</p>
+To monitor the learning progress of the DCGAN, generated images were saved at regular intervals during training, specifically every 5 epochs. 
+At each checkpoint, the Generator produced a fixed set of images from the same random noise vectors. 
+This allowed a consistent comparison of image quality over time.The saved images were then visualized side by side 
+to show the progression of learning. Early epoch outputs appear as random noise with no recognizable structure. As training continues, 
+the images begin to form blurry shapes and basic color patterns. In later epochs, the Generator produces more structured and visually
+coherent Pokémon-like images with clearer shapes and improved details.
+This helps demonstrate how the Generator gradually improves its ability to learn the underlying data distribution through adversarial training with the Discriminator. 
+It also gives a clear visual proof of convergence and training stability over time.  
+
 </body>
 </html>
