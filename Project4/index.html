@@ -168,10 +168,7 @@ DCGAN was implemented to generate realistic Pokemon images from random noise vec
     <li>Generator</li>
     <li>Discriminator</li>
 
-
-<hr>
-
-<h3>Generator</h3>
+<p>Generator:</p>
 
 <p>
 The Generator maps a random noise vector into a 64×64 RGB image. It is built using transposed convolution layers that progressively upsample the latent vector into an image. Batch normalization and ReLU activation are used to stabilize training and improve convergence.
@@ -187,7 +184,7 @@ The Generator maps a random noise vector into a 64×64 RGB image. It is built us
 
 <hr>
 
-<p></p>Discriminator</p>
+<p>Discriminator:</p>
 
 <p>
 The Discriminator is a convolutional neural network that classifies images as real or fake. It progressively downsamples the input image while extracting features for binary classification. Each convolutional block uses batch normalization and LeakyReLU activation to improve gradient flow and avoid the dying ReLU problem.
