@@ -14,25 +14,29 @@
 
 <body>
 
-<h1>Project 4: Generative Models: VAE and GANs</h1>
+    <h1>Project 4: Generative Models: VAE and GANs</h1>
 
-<h2>Introduction:</h2>
+   
+    <p><strong>Student:</strong> Yahani Perera</p>
+    <p><strong>Course:</strong> CS492</p>
 
-<p>
-Generative models are a class of machine learning models designed to learn underlying distribution of data and generate new samples that resemble the original dataset. In this project, we learn two types of generative models.: VAE (VAriational Autoencoders) and GAN (Generative Adversarial Networks). The goal is to understand how these models learn to represent and generate data, compare their performance and behavior. In part1, both a basic autoencoder and a VAE are implemented and trained on the MNIST dataset to analyze reconstruction quality and latent space representation. In part 2, a DCGAN (Deep Convolutional GAN) is implemented using a Pokemon image dataset to generate realistic images from random noise. This project experiments are conducted by adjusting latent dimensions, activation functions and other hyperparameters to observe their effects on training stability and output quality. The project highlights the strengths and limitations of each model , showing how VAEs give more structured latent space for sampling, while GANs can generate more realistic outputs.
-</p>
+    <h2>Introduction:</h2>
 
-PART 1: Variational Autoencoder (VAE)
+    <p>
+    Generative models are a class of machine learning models designed to learn underlying distribution of data and generate new samples that resemble the original dataset. In this project, we learn two types of generative models.: VAE (VAriational Autoencoders) and GAN (Generative Adversarial Networks). The goal is to understand how these models learn to represent and generate data, compare their performance and behavior. In part1, both a basic autoencoder and a VAE are implemented and trained on the MNIST dataset to analyze reconstruction quality and latent space representation. In part 2, a DCGAN (Deep Convolutional GAN) is implemented using a Pokemon image dataset to generate realistic images from random noise. This project experiments are conducted by adjusting latent dimensions, activation functions and other hyperparameters to observe their effects on training stability and output quality. The project highlights the strengths and limitations of each model , showing how VAEs give more structured latent space for sampling, while GANs can generate more realistic outputs.
+    </p>
 
-<h3>Task 1 : Implement and analyze a basic autoencoder.</h3>
+    <h2>PART 1: Variational Autoencoder (VAE)</h2>
 
-<p>
-A fully connected autoencoder was implemented with an encoder that compresses the input image into latent representation and a decoder that reconstructs the image from the latent representation. The main objective was to study how the dimensionality of the latent space affects reconstruction performance and the quality of generated samples. The model was trained on the MNIST dataset using different latent dimensions 2,8 and 32.
-</p>
+    <h3>Task 1 : Implement and analyze a basic autoencoder.</h3>
 
-<h3>Results and Analysis:</h3>
+    <p>
+    A fully connected autoencoder was implemented with an encoder that compresses the input image into latent representation and a decoder that reconstructs the image from the latent representation. The main objective was to study how the dimensionality of the latent space affects reconstruction performance and the quality of generated samples. The model was trained on the MNIST dataset using different latent dimensions 2,8 and 32.
+    </p>
 
-<pre>
+    <h3>Results and Analysis:</h3>
+
+    <pre>
 Latent Dimension = 2:
 Epoch [1/10], Loss: 0.2044
 Epoch [2/10], Loss: 0.1905
@@ -46,7 +50,6 @@ Epoch [9/10], Loss: 0.1732
 Epoch [10/10], Loss: 0.1682
 
 Latent Dimension = 8:
-
 Epoch [1/10], Loss: 0.1371
 Epoch [2/10], Loss: 0.1325
 Epoch [3/10], Loss: 0.1231
@@ -59,7 +62,6 @@ Epoch [9/10], Loss: 0.1128
 Epoch [10/10], Loss: 0.1053
 
 Latent Dimension = 32:
-
 Epoch [1/10], Loss: 0.1328
 Epoch [2/10], Loss: 0.1148
 Epoch [3/10], Loss: 0.0977
@@ -70,26 +72,15 @@ Epoch [7/10], Loss: 0.0869
 Epoch [8/10], Loss: 0.0845
 Epoch [9/10], Loss: 0.0826
 Epoch [10/10], Loss: 0.0758
-</pre>
+    </pre>
 
-<p>
-The model was trained for 10 epochs under different latent space configurations. The loss consistently decreased overtime, indicating stable convergence and successful learning of reconstruction patterns. 
-Latent Dimension = 2: This is a highly compressed representation and the loss is relatively higher. Reconstructed digits are blurry and often incomplete. The model is struggling to preserve fine details. 
-Latent Dimension = 8:Balanced compression and reconstruction quality. Digits are more recognizable. Moderate loss reduction compared to 2D latent space. 
-Latent Dimension = 32: Best reconstruction performance. There is the lowest final loss. The generated outputs closely match the original MNIST match.
+    <h3>Task 2: Implement and analyze VAE.</h3>
 
-These results show that increasing latent dimensionality improves reconstruction quality but it reduces compression strength. However, despite good reconstruction performance, the latent space of a basic autoencoder is not continuous or well-structured. As a result, random  sampling from the latent space does not reliably produce meaningful digits. This limitation motivates the use of VAEs, which impose a probabilistic structure on the latent space, enabling smoother interpolation and more realistic generation.
-</p>
+    <p>
+    A VAE was implemented to improve upon the limitations of the basic autoencoder. VAE learns a probabilistic latent representation of the input data. The encoder maps the input image to two vectors, mean and variance, which define a Gaussian distribution in the latent space. A latent vector is then sampled from this distribution using the reparameterization. The decoder reconstructs the image from this sampled latent vector. The loss function used to train the model have two components: Reconstruction Loss and KL Divergence Loss.
+    </p>
 
-<h3>Task 2: Implement and analyze VAE.</h3>
-
-<p>
-A VAE was implemented to improve upon the limitations of the basic autoencoder. VAE learns a probabilistic latent representation of the input data. The encoder maps the input image to two vectors, mean and variance, which define a Gaussian distribution in the latent space. A latent vector is then sampled from this distribution using the reparameterization. The decoder reconstructs the image from this sampled latent vector. The loss function used to train the model have two components: 
-Reconstruction Loss: measures how well the output matches the input
-2) KL DIvergence Loss: regularizes the latent space by forcing it to follow a standard normal distribution.The model was also trained on the MNIST dataset for 10 epochs.
-</p>
-
-<pre>
+    <pre>
 Epoch [1/10] Loss: 16693.7656
 Epoch [2/10] Loss: 16297.6387
 Epoch [3/10] Loss: 15411.2490
@@ -100,28 +91,25 @@ Epoch [7/10] Loss: 15796.4453
 Epoch [8/10] Loss: 16015.4297
 Epoch [9/10] Loss: 15388.6416
 Epoch [10/10] Loss: 14349.2031
-</pre>
+    </pre>
 
-<p>
-The training loss decreased over epochs, showing that the VAE learned both reconstructions and latent space regularization successfully. Loss values are very large compared to the basic autoencoder. It happens because the VAE loss includes both reconstruction error and KL divergence.
-</p>
+    <p>
+    The training loss decreased over epochs, showing that the VAE learned both reconstructions and latent space regularization successfully.
+    </p>
 
-<p>
-Sampling from latent space: random samples were generated by drawing the latent vectors from a standard normal distribution and passing them through the decoder. The generated images showed significant improvement compared to the basic autoencoder. The images were more structured and consistent, the output resembled clear handwritten digits and different samples produced a diverse digit style. This shows that the VAE can generate more meaningful data from random latent vectors . 
-</p>
+    <p>
+    Sampling from latent space: random samples were generated by drawing the latent vectors from a standard normal distribution and passing them through the decoder.
+    </p>
 
-<p>
-Comparison with Basic Autoencoder: the autoencoder gave blurry and inconsistent images, while VAE generated clear and more realistic images. It occurs because the autoencoder does not constrain its latent space but VAE enforces a continuous and smooth latent distribution.
-</p>
+    <p>
+    Comparison with Basic Autoencoder: the autoencoder gave blurry and inconsistent images, while VAE generated clear and more realistic images.
+    </p>
 
-<h3>Latent Space Visualization</h3>
+    <h3>Latent Space Visualization</h3>
 
-<p>
-The latent space of the VAE was visualized by sampling points from a 2D grid and decoding them into images. 
-In the range [-1, 1], the transitions between digits were smooth, and similar digits appeared close to each other
-In the range [-5, 5], more variation was observed, but extreme values sometimes produced distorted images
-This shows that the VAE organizes the latent space in a structured way, where nearby points correspond to similar outputs.
-</p>
+    <p>
+    The latent space of the VAE was visualized by sampling points from a 2D grid and decoding them into images.
+    </p>
 
 </body>
 </html>
