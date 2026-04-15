@@ -150,56 +150,43 @@ Epoch [10/10] Loss: 14349.2031
 
 <h3>Task 1: Implement a deep convolutional GAN.</h3>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>DCGAN Architecture</title>
-</head>
-<body>
-
-<p>DCGAN Implementation:</p>
-<p>DCGAN was implemented to generate realistic Pokemon images from random noise vectors. The model consists of two neural networks:</p>
-
-    <li>Generator</li>
-    <li>Discriminator</li>
-
-<p>Generator:</p>
-
 <p>
-The Generator maps a random noise vector into a 64×64 RGB image. It is built using transposed convolution layers that progressively upsample the latent vector into an image. Batch normalization and ReLU activation are used to stabilize training and improve convergence.
+DCGAN was implemented to generate realistic Pokemon images from random noise vectors. The model consists of two neural networks:
 </p>
 
-<p>Generator Architecture</p>    
+<p>Generator</p>
+<p>Discriminator</p>
 
+<p>
+Generator: maps a random noise vector into a 64×64 RGB image. It is built using transposed convolution layers that progressively upsample the latent vector into an image. Batch normalization and ReLU activation are used to stabilize training and improve convergence.
+</p>
+
+<p>Each basic block in the Generator includes:</p>
 <ul>
     <li>Transposed Convolution Layer</li>
     <li>Batch Normalization</li>
     <li>ReLU Activation</li>
 </ul>
 
-<hr>
-
-<p>Discriminator:</p>
-
 <p>
-The Discriminator is a convolutional neural network that classifies images as real or fake. It progressively downsamples the input image while extracting features for binary classification. Each convolutional block uses batch normalization and LeakyReLU activation to improve gradient flow and avoid the dying ReLU problem.
+Discriminator: convolutional neural network that classifies images as real or fake. It progressively downsamples the input image while extracting features for binary classification. Each convolutional block uses batch normalization and LeakyReLU activation to improve gradient flow and avoid the dying ReLU problem.
 </p>
 
-<p>Discriminator Architecture</p>
-
+<p>Each basic block in the Discriminator includes:</p>
 <ul>
     <li>Convolution Layer</li>
     <li>Batch Normalization</li>
     <li>Leaky ReLU Activation</li>
 </ul>
 
-<p>   
-We use LeakyReLU in the discriminator to help the model to learn more stability. After training, we see the loss values and generate sample images to 
-see how well the model learns. 
-LeakyReLU was used in the discriminator to improve training stability by allowing small gradients for negative inputs.
+<p>
+We use LeakyReLU in the discriminator to help the model learn with more stability. After training, we observe the loss values and generate sample images to evaluate how well the model learns.
 </p>
 
+<p>
+LeakyReLU was used in the discriminator to improve training stability by allowing small gradients for negative inputs.
+</p>
+    
 <h3>Training Results:</h3>
 
 <p>It was monitored using generator and discriminator losses over 20 epochs.</p>
