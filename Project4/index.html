@@ -296,5 +296,14 @@ coherent Pokémon-like images with clearer shapes and improved details.
 This helps demonstrate how the Generator gradually improves its ability to learn the underlying data distribution through adversarial training with the Discriminator. 
 It also gives a clear visual proof of convergence and training stability over time.  
 
+ <h4>Conclution:</h4>
+  <p>In this project, we implemented and analyzed a basic autoencoder, VAE (Variational Autoencoder), and a Deep Convolutional GAN (DCGAN). 
+    The autoencoder achieved good reconstruction performance, especially with high latent dimensions, but failed to generate meaningful samples 
+    because of an unstructured latent space. The VAE improved this by learning a smooth and continuous latent distribution, 
+    with more realistic and consistent images. The DCGAN gave  the most realistic results, but training was unstable and sensitive 
+    to design choices. The comparison between LeakyReLU and ReLU showed that LeakyReLU provides better training stability and image quality. 
+    Overall, this project highlights the trade-offs between reconstruction ability, latent space structure, and generation quality across 
+    different generative models. </p>
+  
 </body>
 </html>
